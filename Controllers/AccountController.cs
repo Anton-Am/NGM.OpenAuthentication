@@ -46,6 +46,10 @@ namespace NGM.OpenAuthentication.Controllers {
 
         [AlwaysAccessible]
         public ActionResult ExternalLogOn(string returnUrl) {
+            if (state != null)
+            {
+                DotNetOpenAuth.AspNet.Clients.GoogleOAuth2Client.RewriteRequest();
+            }
             AuthenticationResult result = _orchardOpenAuthWebSecurity.VerifyAuthentication(Url.OpenAuthLogOn(returnUrl));
 
             if (!result.IsSuccessful) {
